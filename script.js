@@ -5,7 +5,7 @@ const error = document.getElementById("error");
 const doneCount = document.getElementById("doneCount");
 
 // Array som lagrar uppgifterna
-let tasks = [];
+let mytodo = [];
 
 btn.addEventListener("click", function() {
   const text = input.value.trim();
@@ -17,7 +17,7 @@ btn.addEventListener("click", function() {
   }
 
   // Lägg till uppgiften i arrayen
-  tasks.push({ text: text, done: false });
+  mytodo.push({ text: text, done: false });
   input.value = "";
 
   renderTasks();
@@ -26,30 +26,26 @@ btn.addEventListener("click", function() {
 function renderTasks() {
   list.innerHTML = "";
 
-  tasks.forEach((task, index) => {
+  mytodo.forEach((task, index) => {
     const li = document.createElement("li");
 
-    // Texten på uppgiften
     const span = document.createElement("span");
     span.innerText = task.text;
     li.appendChild(span);
 
-    // Om uppgiften är klar
     if (task.done) li.classList.add("completed");
 
-    // Klicka på texten → klar/inte klar
     span.addEventListener("click", function() {
       task.done = !task.done;
       renderTasks();
     });
 
-    // Papperskorg
     const del = document.createElement("span");
     del.innerText = "🗑️";
     del.classList.add("deleteBtn");
     del.addEventListener("click", function(e) {
-      e.stopPropagation(); // så li inte markeras
-      tasks.splice(index, 1); // ta bort från array
+      e.stopPropagation();
+      mytodo.splice(index, 1);
       renderTasks();
     });
     li.appendChild(del);
@@ -57,6 +53,5 @@ function renderTasks() {
     list.appendChild(li);
   });
 
-  // Uppdatera räknare
-  doneCount.innerText = tasks.filter(t => t.done).length;
+  doneCount.innerText = mytodo.filter(t => t.done).length;
 }
