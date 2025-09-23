@@ -5,7 +5,7 @@ const error = document.getElementById("error");
 const doneCount = document.getElementById("doneCount");
 
 // Array som lagrar uppgifterna
-let mytodo = [];
+var mytodo = [];
 
 btn.addEventListener("click", function() {
   const text = input.value.trim();
@@ -29,17 +29,20 @@ function renderTasks() {
   mytodo.forEach((task, index) => {
     const li = document.createElement("li");
 
+    // Texten på uppgiften
     const span = document.createElement("span");
     span.innerText = task.text;
     li.appendChild(span);
 
     if (task.done) li.classList.add("completed");
 
+    // Klicka på texten → klar/inte klar
     span.addEventListener("click", function() {
       task.done = !task.done;
       renderTasks();
     });
 
+    // Papperskorg
     const del = document.createElement("span");
     del.innerText = "🗑️";
     del.classList.add("deleteBtn");
@@ -53,5 +56,6 @@ function renderTasks() {
     list.appendChild(li);
   });
 
+  // Uppdatera räknare
   doneCount.innerText = mytodo.filter(t => t.done).length;
 }
