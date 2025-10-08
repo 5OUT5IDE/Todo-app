@@ -6,13 +6,18 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Min ToDo-lista</h1>
+  <div class="todo-container">
+    <h1>My ToDo</h1>
+<p class="done-count"><span id="doneCount">0</span> Completed</p>
 
-  <input type="text" id="taskInput" placeholder="Skriv en uppgift">
-  <button id="addBtn">Lägg till</button>
-  <small id="error"></small>
-  <p>Klara uppgifter: <span id="doneCount">0</span></p>
-  <ul id="taskList"></ul>
+    <div class="input-row">
+      <input type="text" id="taskInput" placeholder="">
+      <button id="addBtn">OK</button>
+    </div>
+
+  <small id="error" aria-live="polite"></small>
+    <ul id="taskList"></ul>
+  </div>
 
   <script src="script.js"></script>
 </body>

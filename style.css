@@ -1,16 +1,184 @@
-h1 {
-  color: blue;
+/* Grund */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 40px;
+  height: 100vh;
+  background: linear-gradient(to bottom, #ffc2c2, #f88d8d);
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-li {
-  list-style: none;
-  margin: 5px 0;
-  padding: 5px;
-  background: #f0f0f0;
+/* ToDo-kortet */
+.todo-container {
+  background-color: #fff;
+  padding: 2rem 3.5rem;
+  width: 400px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  text-align: center;
+  opacity: 0;
+  animation: dropDown 0.8s ease forwards;
+}
+
+/* Animation som får ToDo-kortet att "droppa ner" */
+@keyframes dropDown {
+  from {
+    opacity: 0;
+    transform: translateY(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Titel för sidan */
+h1 {
+  font-family: 'Georgia', serif;
+  font-size: 2.6rem;
+  font-weight: bold;
+  color: #222;
+  margin: 0 0 1rem 0;
+}
+
+/* Text för antalet klara uppgifter */
+p {
+  margin: 0 0 1.2rem 0;
+  color: #444;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Raden med inputfält och knapp */
+.input-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+/* Textfält där man skriver nya uppgifter */
+#taskInput {
+  padding: 0.5rem 0.75rem;
+  font-size: 1.5rem;
+  border: 1px solid #bbb;
+  border-radius: 0.3rem;
+  width: 220px;
+  transition: border-color 0.2s;
+}
+
+/* När man klickar i textfältet */
+#taskInput:focus {
+  outline: none;
+  border-color: #888;
+}
+
+/* Lägg till-knappen */
+#addBtn {
+  padding: 0.70rem 1rem;
+  font-size: 1.05rem;
+  border: 1px solid #999;
+  border-radius: 0.3rem;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: bold; 
+}
+
+/* När musen är över knappen */
+#addBtn:hover {
+  background-color: #eee;
+}
+
+/* Felmeddelande som visas om något är fel */
+#error {
+  color: #d11;
+  font-size: 0.9rem;
+  margin-top: 0.4rem;
+  min-height: 1.2rem;
+  font-style: italic;
+}
+
+/* Blink-animation för felmeddelandet */
+@keyframes blinkFlash {
+  0%, 100% {
+    opacity: 1;
+    color: #d11;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.25;
+    color: #ff0000;
+    transform: scale(0.98);
+  }
+}
+
+/*blink-animationen på felmeddelandet */
+#error.blink {
+  animation: blinkFlash 0.6s ease 3;
+}
+
+/* Uppgiftslistan - slutförda uppgifter */
+#taskList li.completed {
+  text-align: center; 
+  color: #9ca3af;
+}
+
+/* Gör texten klickbar */
+#taskList li > span:first-child {
   cursor: pointer;
 }
 
-li.completed {
+/* När man håller musen över en uppgift eller den är klar visas linje över texten */
+#taskList li:hover > span:first-child,
+#taskList li.completed > span:first-child {
   text-decoration: line-through;
-  color: gray;
+}
+
+/* Räknare för klara uppgifter */
+.todo-container .done-count {
+  text-align: center;
+  margin-top: 0.75rem;
+  color: #000000;
+  font-size: 0.95rem;
+}
+
+#doneCount {
+  font-size: 0.95rem;
+  color: #000000;
+  margin-left: 0.25rem;
+}
+
+/* Enskild uppgift i listan */
+li {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 0.2rem 0;
+  margin-bottom: 0.4rem;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  transition: color 0.2s, opacity 0.2s;
+  justify-content: space-around;
+}
+
+/* Animation för nya uppgifter som kommer in */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Klass som används för att animera nya uppgifter (Javascript) */
+#taskList li.new {
+  animation: fadeInUp 0.45s ease forwards;
 }
