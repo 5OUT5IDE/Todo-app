@@ -43,17 +43,19 @@ function renderTasks() {
 
     if (task.done) li.classList.add("completed");
 
-    // Om uppgiften är ny (isNew) så lägg på klassen 'new' och
-    // ta bort klassen + flaggan efter animationen. Detta förhindrar
-    // att andra renderingar (t.ex. toggle completed) triggar animation.
-  if (task.isNew) {
-    li.classList.add('new');
-
-    li.addEventListener('animationend', () => {
-      li.classList.remove('new');
-      task.isNew = false;
-    }, { once: true });
-  }
+    // Kollar om uppgiften är ny
+if (task.isNew) {
+  // Lägg till klassen "new" för att starta animationen
+  li.className += ' new';
+  
+  // När animationen är slut, kör denna funktion
+  li.onaanimationend = function() {
+    // Ta bort klassen "new" så animationen slutar
+    li.className = li.className.replace(' new', '');
+    // Säg att uppgiften inte är ny längre
+    task.isNew = false;
+  };
+}
 
   // Klicka på texten → klar/inte klar
   span.addEventListener("click", function() {
