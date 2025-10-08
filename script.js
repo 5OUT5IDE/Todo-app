@@ -5,7 +5,7 @@ const error = document.getElementById("error");
 const doneCount = document.getElementById("doneCount");
 
 // Array som lagrar uppgifterna
-let tasks = [];
+var mytodo = [];
 
 btn.addEventListener("click", function() {
   const text = input.value.trim();
@@ -23,8 +23,8 @@ btn.addEventListener("click", function() {
     error.classList.remove('blink');
   }
 
-  // Lägg till uppgiften i arrayen och markera som ny
-  tasks.push({ text: text, done: false, isNew: true });
+  // Lägg till uppgiften i arrayen
+  tasks.push({ text: text, done: false });
   input.value = "";
 
   renderTasks();
@@ -33,7 +33,7 @@ btn.addEventListener("click", function() {
 function renderTasks() {
   list.innerHTML = "";
 
-  tasks.forEach((task, index) => {
+  mytodo.forEach((task, index) => {
     const li = document.createElement("li");
 
     // Texten på uppgiften
@@ -41,7 +41,6 @@ function renderTasks() {
     span.innerText = task.text;
     li.appendChild(span);
 
-    // Om uppgiften är klar
     if (task.done) li.classList.add("completed");
 
     // Om uppgiften är ny (isNew) så lägg på klassen 'new' och
@@ -66,8 +65,8 @@ function renderTasks() {
     del.innerText = "🗑️";
     del.classList.add("deleteBtn");
     del.addEventListener("click", function(e) {
-      e.stopPropagation(); // så li inte markeras
-      tasks.splice(index, 1); // ta bort från array
+      e.stopPropagation();
+      mytodo.splice(index, 1);
       renderTasks();
     });
     li.appendChild(del);
@@ -76,5 +75,5 @@ function renderTasks() {
   });
 
   // Uppdatera räknare
-  doneCount.innerText = tasks.filter(t => t.done).length;
+  doneCount.innerText = mytodo.filter(t => t.done).length;
 }
