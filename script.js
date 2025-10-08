@@ -24,7 +24,7 @@ btn.addEventListener("click", function() {
   }
 
   // Lägg till uppgiften i arrayen
-  tasks.push({ text: text, done: false });
+  mytodo.push({ text: text, done: false });
   input.value = "";
 
   renderTasks();
@@ -46,33 +46,35 @@ function renderTasks() {
     // Om uppgiften är ny (isNew) så lägg på klassen 'new' och
     // ta bort klassen + flaggan efter animationen. Detta förhindrar
     // att andra renderingar (t.ex. toggle completed) triggar animation.
-   if (task.isNew) {
-  li.classList.add('new');
+  if (task.isNew) {
+    li.classList.add('new');
 
-  li.addEventListener('animationend', () => {
-    li.classList.remove('new');
-    task.isNew = false;
-  }, { once: true }); 
+    li.addEventListener('animationend', () => {
+      li.classList.remove('new');
+      task.isNew = false;
+    }, { once: true });
+  }
 
-    // Klicka på texten → klar/inte klar
-    span.addEventListener("click", function() {
-      task.done = !task.done;
-      renderTasks();
-    });
-
-    // Papperskorg
-    const del = document.createElement("span");
-    del.innerText = "🗑️";
-    del.classList.add("deleteBtn");
-    del.addEventListener("click", function(e) {
-      e.stopPropagation();
-      mytodo.splice(index, 1);
-      renderTasks();
-    });
-    li.appendChild(del);
-
-    list.appendChild(li);
+  // Klicka på texten → klar/inte klar
+  span.addEventListener("click", function() {
+    task.done = !task.done;
+    renderTasks();
   });
+
+  // Papperskorg
+  const del = document.createElement("span");
+  del.innerText = "🗑️";
+  del.classList.add("deleteBtn");
+  del.addEventListener("click", function(e) {
+    e.stopPropagation();
+    mytodo.splice(index, 1);
+    renderTasks();
+  });
+  li.appendChild(del);
+
+  list.appendChild(li);
+});
+
 
   // Uppdatera räknare
   doneCount.innerText = mytodo.filter(t => t.done).length;
