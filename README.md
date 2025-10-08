@@ -2,6 +2,11 @@
 
 Det här är min ToDo-applikation gjord med **HTML, CSS och JavaScript**.
 
+## Demo
+
+Live-demo: https://5out5ide.github.io/Todo-app/
+
+
 ## Vad appen gör
 
 - Du kan skriva en uppgift i ett **inputfält**.
@@ -31,8 +36,6 @@ Det här är min ToDo-applikation gjord med **HTML, CSS och JavaScript**.
 2. Öppna **index.html** i en webbläsare.
 3. Börja skriva uppgifter och testa funktionerna.
 
-
-> Annars kan du använda https://5out5ide.github.io/Todo-app/
 
 
 
