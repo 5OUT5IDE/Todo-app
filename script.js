@@ -23,8 +23,8 @@ btn.addEventListener("click", function() {
     error.classList.remove('blink');
   }
 
-  // Lägg till uppgiften i arrayen
-  mytodo.push({ text: text, done: false });
+  // Lägg till uppgiften i arrayen och markera som ny för animation
+  mytodo.push({ text: text, done: false, isNew: true });
   input.value = "";
 
   renderTasks();
@@ -43,17 +43,13 @@ function renderTasks() {
 
     if (task.done) li.classList.add("completed");
 
-    // Om uppgiften är ny (isNew) så lägg på klassen 'new' och
-    // ta bort klassen + flaggan efter animationen. Detta förhindrar
-    // att andra renderingar (t.ex. toggle completed) triggar animation.
-  if (task.isNew) {
-    li.classList.add('new');
-
-    li.addEventListener('animationend', () => {
-      li.classList.remove('new');
-      task.isNew = false;
-    }, { once: true });
-  }
+    if (task.isNew) {
+      li.classList.add('new');  // CSS animerar denna klass
+      li.addEventListener('animationend', function() {
+        li.classList.remove('new');  // ta bort klassen
+        task.isNew = false;          // markera som inte ny längre
+      });
+    }
 
   // Klicka på texten → klar/inte klar
   span.addEventListener("click", function() {
