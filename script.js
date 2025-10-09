@@ -51,7 +51,7 @@ function renderTasks() {
       });
     }
 
-  // Klicka på texten → klar/inte klar
+  // Klicka på texten,klar/inte klar
   span.addEventListener("click", function() {
     task.done = !task.done;
     renderTasks();
