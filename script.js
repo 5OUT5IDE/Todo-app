@@ -43,19 +43,13 @@ function renderTasks() {
 
     if (task.done) li.classList.add("completed");
 
-    // Kollar om uppgiften är ny
-if (task.isNew) {
-  // Lägg till klassen "new" för att starta animationen
-  li.className += ' new';
-  
-  // När animationen är slut, kör denna funktion
-  li.onaanimationend = function() {
-    // Ta bort klassen "new" så animationen slutar
-    li.className = li.className.replace(' new', '');
-    // Säg att uppgiften inte är ny längre
-    task.isNew = false;
-  };
-}
+    if (task.isNew) {
+      li.classList.add('new');  // CSS animerar denna klass
+      li.addEventListener('animationend', function() {
+        li.classList.remove('new');  // ta bort klassen
+        task.isNew = false;          // markera som inte ny längre
+      });
+    }
 
   // Klicka på texten → klar/inte klar
   span.addEventListener("click", function() {
